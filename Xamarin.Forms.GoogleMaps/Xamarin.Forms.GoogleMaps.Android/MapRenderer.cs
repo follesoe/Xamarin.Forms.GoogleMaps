@@ -165,6 +165,7 @@ namespace Xamarin.Forms.GoogleMaps.Android
 
                 _uiSettingsLogic.Register(map, nativeMap);
                 Map.OnSnapshot += OnSnapshot;
+                Map.OnCallDispose = CallDispose;
 
                 nativeMap.SetOnMapClickListener(this);
                 nativeMap.SetOnMapLongClickListener(this);
@@ -492,6 +493,7 @@ namespace Xamarin.Forms.GoogleMaps.Android
                 _uiSettingsLogic.Unregister();
 
                 map.OnSnapshot -= OnSnapshot;
+                map.OnCallDispose = null;
                 _cameraLogic.Unregister();
 
                 foreach (var logic in Logics)
@@ -511,6 +513,11 @@ namespace Xamarin.Forms.GoogleMaps.Android
                 var message = ex.Message;
                 System.Diagnostics.Debug.WriteLine($"Uninitialize failed. - {message}");
             }
+        }
+
+        private void CallDispose()
+        {
+            Dispose(true);
         }
 
         bool _disposed;

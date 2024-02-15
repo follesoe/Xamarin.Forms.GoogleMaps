@@ -98,6 +98,8 @@ namespace Xamarin.Forms.GoogleMaps
 
         public Action<TakeSnapshotMessage> OnSnapshot{ get; set; }
 
+        public Action OnCallDispose { get; set; }
+
         MapSpan _visibleRegion;
         MapRegion _region;
 
@@ -460,6 +462,33 @@ namespace Xamarin.Forms.GoogleMaps
         private void SendMoveToRegion(MoveToRegionMessage message)
         {
             OnMoveToRegion?.Invoke(message);
+        }
+
+        /// <summary>
+        /// Method to allow users of the Map to explicitly call Dispose to avoid memory leaks.
+        /// </summary>
+        /// <remarks>
+        /// This is a workaround for memory leak experienced where the Map would prevent the
+        /// Xamarin.Forms page from not beeing disposed.
+        /// </remarks>
+        /// <seealso cref="https://github.com/xamarin/Xamarin.Forms/issues/1877#issuecomment-1284190264"/>
+        public void SendRendererDispose()
+        {
+            _pins.CollectionChanged -= PinsOnCollectionChanged;
+            _polylines.CollectionChanged -= PolylinesOnCollectionChanged;
+            _polygons.CollectionChanged -= PolygonsOnCollectionChanged;
+            _circles.CollectionChanged -= CirclesOnCollectionChanged;
+            _tileLayers.CollectionChanged -= TileLayersOnCollectionChanged;
+            _groundOverlays.CollectionChanged -= GroundOverlays_CollectionChanged;
+
+            _pins.Clear();
+            _polylines.Clear();
+            _polygons.Clear();
+            _circles.Clear();
+            _tileLayers.Clear();
+            _groundOverlays.Clear();
+
+            OnCallDispose?.Invoke();
         }
 
         void SendMoveCamera(CameraUpdateMessage message)
