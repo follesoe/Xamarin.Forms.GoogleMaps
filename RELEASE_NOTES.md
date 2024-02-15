@@ -1,6 +1,13 @@
 Xamarin.Forms.GoogleMaps Release Notes
 ----
 
+# 5.1.0
+
+## New Features
+
+* Add method to explicitly dispose the MapRenderer on Android, to avoid memory leaks
+* Update Android version and external dependencies
+
 # 5.0.0
 
 ## New Features

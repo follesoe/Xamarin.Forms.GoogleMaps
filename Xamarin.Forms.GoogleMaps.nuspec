@@ -3,8 +3,15 @@
 	<metadata minClientVersion="2.8.3">
 		<id>Xamarin.Forms.GoogleMaps</id>
 		<title>Xamarin.Forms.GoogleMaps</title>
-		<version>5.0.0</version>
+		<version>5.1.0</version>
 		<releaseNotes>
+# 5.1.0
+
+## New Features
+
+* Add method to explicitly dispose the MapRenderer on Android, to avoid memory leaks
+* Update Android version and external dependencies
+
 # 5.0.0
 
 ## New Features
@@ -84,7 +91,7 @@
 full release notes is here - https://github.com/amay077/Xamarin.Forms.GoogleMaps/blob/master/RELEASE_NOTES.md
 		</releaseNotes>
 		<authors>amay077</authors>
-		<copyright>Copyright 2016-2022</copyright>
+		<copyright>Copyright 2016-2024</copyright>
 		<license type="file">LICENSE.txt</license>
     <projectUrl>https://github.com/amay077/Xamarin.Forms.GoogleMaps</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
